@@ -6,7 +6,6 @@ import plotly.graph_objects as go
 
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
-#------------ Configuración web ------------
 try:
     logo = Image.open("src/logo_AI.png")
     st.set_page_config(
@@ -23,7 +22,6 @@ except FileNotFoundError:
     )
     st.warning("Advertencia: No se pudo encontrar 'src/logo_AI.png'. Usando ícono por defecto.")
 
-# Función para cargar datos con caché
 @st.cache_data(ttl=600)
 def load_data(gid):
     base_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTgIAHF5Rdo7EzkMz6ymYeBoDWQ4BDb6j0OzZNFa3OuHiEq3HS3t0BCQt7bof3MHk3NXQRp-3rZzz5l/pub?output=csv&gid="
@@ -44,7 +42,6 @@ def load_data(gid):
         st.error(f"Error al cargar los datos: {e}")
         return pd.DataFrame(), {}
 
-# Nuevo Dashboard
 def show_dashboard(page_title, gid):
     df_historia, fecha_dict = load_data(gid)
 
@@ -344,7 +341,6 @@ def show_dashboard(page_title, gid):
                 
                 st.plotly_chart(fig_barras_2, use_container_width=True)
                 
-### Main function
 def main():
     st.sidebar.title("Menú")
     st.sidebar.markdown("""
@@ -379,15 +375,14 @@ def main():
     if 'page' not in st.session_state:
         st.session_state.page = "Inicio"
     
-    # Grid IDs para cada categoría
     GIDs = {
-        "Inicio": 888266253,  # Historia y Literatura
-        "Noticias": 0,       # Reemplazar con el GID correcto
-        "Educación": 0,      # Reemplazar con el GID correcto
-        "Poder Judicial": 0, # Reemplazar con el GID correcto
-        "Poder Legislativo": 0, # Reemplazar con el GID correcto
-        "Medicina": 0,       # Reemplazar con el GID correcto
-        "Empleo": 0          # Reemplazar con el GID correcto
+        "Inicio": 888266253, 
+        "Noticias": 0,      
+        "Educación": 0,      
+        "Poder Judicial": 0,
+        "Poder Legislativo": 0,
+        "Medicina": 0,      
+        "Empleo": 0          
     }
 
     if st.sidebar.button("Historia y Literatura"):
@@ -430,4 +425,5 @@ def main():
         st.write("Selecciona una de las opciones en el menú lateral para ver el contenido.")
 
 if __name__ == "__main__":
+
     main()
